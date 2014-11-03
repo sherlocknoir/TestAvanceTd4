@@ -122,7 +122,7 @@ public class Explosives{
 	  @(\exists int i; 0<=i && i<nb_assign;
 	  @		(\forall int j; 0<=j && j<nb_assign;
 	  @			(assign[i][0].equals(assign[j][0]) ==> 
-	  @				(!compatible(assign[j][1], prod)))));	
+	  @				(compatible(assign[j][1], prod)))));	
 	  @*/
 	public /*@ pure @*/ String findBat(String prod){
 		boolean trueFlag = false;
