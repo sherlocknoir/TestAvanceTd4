@@ -4,7 +4,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class TestExplosivesJUnit4Public {
+public class TestExplosivesFindBat {
 
 	static int nb_inc = 0;
 	static int nb_fail = 0;
@@ -12,7 +12,7 @@ public class TestExplosivesJUnit4Public {
 	Explosives e;
 
 	public static void main(String args[]) {
-		String testClass = "TestExplosivesJUnit4Public";
+		String testClass = "TestExplosivesFindBat";
 		org.junit.runner.JUnitCore.main(testClass);
 		
 		
@@ -45,35 +45,14 @@ public class TestExplosivesJUnit4Public {
 				+ " -- failures : " + nb_fail);
 	}
 
-		@Test
-	public void invalidePreCond1(){
+	@Test
+	public void invalidePreCond_1(){
 		e = new Explosives();
 		String prod1 = null;
 		String prod2 = null;
 		e.add_incomp(prod1, prod2);
 		
 	}
-
-	@Test
-	public void invalidePreCond2(){
-		e = new Explosives();
-		String prod1 = "Prodrrr";
-		String prod2 = null;
-		e.add_incomp(prod1, prod2);
-		
-	}
-	
-	@Test
-	public void invalidePreCond3(){
-		e = new Explosives();
-		e.nb_inc = 49;
-		String prod1 = "Prodrrr";
-		String prod2 = null;
-		e.add_incomp(prod1, prod2);
-		
-	}
-
-
 
 
 }

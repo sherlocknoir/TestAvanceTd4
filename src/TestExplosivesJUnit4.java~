@@ -44,7 +44,7 @@ public class TestExplosivesJUnit4 {
 		System.out.println("\n inconclusive tests: " + nb_inc
 				+ " -- failures : " + nb_fail);
 	}
-/**
+
 	@Test
 	public void testSequence_0() {
 		try {
@@ -63,121 +63,164 @@ public class TestExplosivesJUnit4 {
 
 	@Test
 	public void invalidePropiete_1() {
+		
+		try{
+			e = new Explosives();
+			for(int i = 0; i < 48; ){
+				e.add_incomp("Prod_Nitro"+i, "Prod_Glycerine"+i);
+				i=i+2;
+			}
+			e.add_incomp("Prod_Dybna", "Prod_Mbite");
 
-		e = new Explosives();
-	
-		for(int i = 0; i < 48; ){
-
-			e.add_incomp("Prod_Nitro"+i, "Prod_Glycerine"+i);
-			i=i+2;
-		}
-	
-		e.add_incomp("Prod_Dybna", "Prod_Mbite");
-
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
+		
 	}
 
 	@Test
 	public void invalidePropiete_2() {
-		e = new Explosives();
+		try{
+			e = new Explosives();
 		
-		for(int i = 0; i < 30; ){
+			for(int i = 0; i < 30; ){
 
-			e.add_assign("Bat_2", "Prod_Mite"+i);
+				e.add_assign("Bat_2", "Prod_Mite"+i);
 			
-		}
+			}
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
+		
 	}
+
+	
 
 	@Test
 	public void invalidePropiete_3() {
-		e = new Explosives();
-		e.add_incomp("tt", "sss");
+		try{
+			e = new Explosives();
+			e.add_incomp("tt", "sss");
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
+		
+	}
+
+	@Test
+	public void  testSequence_Prop3_success() {
+		try{
+			e=new Explosives();
+		    e.add_incomp("Prod_ss1","Prod_ss2");
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
 	}
 
 	@Test
 	public void invalidePropiete_4(){
-		e = new Explosives();
-		e.add_assign("tt", "Prod__");
+		try{
+			e = new Explosives();
+			e.add_assign("tt", "Prod__");
+
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
+		
 	}
 	
 	@Test
+	public void  testSequence_Prop4_success() {
+		try{
+			e=new Explosives();
+		    e.add_assign("Bat_bb1","Prod_ss1");
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
+	}
+	
+
+	@Test
 	public void invalidePropiete_5(){
-		e = new Explosives();
-		e.add_incomp("Prod_Nitro", "Prod_Nitro");
+		try{
+			e = new Explosives();
+			e.add_incomp("Prod_Nitro", "Prod_Nitro");
+
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
+	}
+	
+	@Test
+	public void  testSequence_Prop5_success() {
+		try{
+			e=new Explosives();
+		    e.add_incomp("Prod_ss3","Prod_ss4");
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
+	}	
+	
+	@Test
+	public void invalidePropiete_6(){
+		try{
+			e = new Explosives();
+			e.incomp[0][0] = "Prod_hd";
+			e.incomp[0][1] = "Prod_sos";
+			e.nb_inc++;
+			e.skip();
+			}
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
+		
 	}
 
 	@Test
-	public void invalidePropiete_6(){
-		e = new Explosives();
-		e.incomp[0][0] = "Prod_hd";
-		e.incomp[0][1] = "Prod_sos";
-		e.nb_inc++;
-		e.skip();
+	public void  testSequence_Prop6_success() {
+		try{
+			Explosives e = new Explosives();
+			for (int i = 1; i < 25;) {
+				int j = i + 1;
+				e.add_incomp("Prod_ss" + i, "Prod_ss" + j);
+				i=i+2;
+			}
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
 	}
+	
 
 	@Test
 	public void invalidePropiete_7(){
-		e = new Explosives();
-		e.add_incomp("Prod_Nitro", "Prod_Glycerine");
-		e.add_assign("Bat_1", "Prod_Nitro");	
-		e.add_assign("Bat_1", "Prod_Glycerine");
-	}
-**/
+		try{
+			e = new Explosives();
+			e.add_incomp("Prod_Nitro", "Prod_Glycerine");
+			e.add_assign("Bat_1", "Prod_Nitro");	
+			e.add_assign("Bat_1", "Prod_Glycerine");
 
-/**
-	@Test
-	public void invalidePreCond1_1(){
-		e = new Explosives();
-		String prod1 = null;
-		String prod2 = null;
-		e.add_incomp(prod1, prod2);
-		
-	}
-
-	@Test
-	public void invalidePreCond1_2(){
-		e = new Explosives();
-		String prod1 = "Prodrrr";
-		String prod2 = null;
-		e.add_incomp(prod1, prod2);
+		} 	catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
 		
 	}
 	
 	@Test
-	public void invalidePreCond1_3(){
-		e = new Explosives();
-		e.nb_inc = 49;
-		String prod1 = "Prodrrr";
-		String prod2 = null;
-		e.add_incomp(prod1, prod2);
+	public void  testSequence_prop7_success() {
+	try{
+		Explosives e = new Explosives();
+		for (int i = 1; i < 25;) {
+			int j = i + 1;
+			e.add_incomp("Prod_ss" + i, "Prod_ss" + j);
+			i=i+2;
+		}
+		e.add_assign("Bat_A", "Prod_ss1");
+	        e.add_assign("Bat_B", "Prod_ss2");
 		
+	} catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+		handleJMLAssertionError(e);		
+	}  
 	}
-**/
-
-	@Test
-	public void testFindBat(){
-		e = new Explosives();
-		System.out.println("Inserting Prod_Nitro Prod_Glycerine");
-		e.add_incomp("Prod_Nitro","Prod_Glycerine");
-		System.out.println("Inserting Prod_Dyna Prod_Mite");
-		e.add_incomp("Prod_Dyna","Prod_Mite");
-		System.out.println("Assigning Prod_Dyna to Bat_1");
-		e.add_assign("Bat_1","Prod_Dyna");
-		System.out.println("Assigning Prod_Nitro to Bat_1");
-		e.add_assign("Bat_1","Prod_Nitro");
-		System.out.println("Assigning Prod_Mite to Bat_2");
-		e.add_assign("Bat_2","Prod_Mite");
-		System.out.println("Assigning Prod_Glycerine to Bat_1");
-		e.add_assign("Bat_2","Prod_Glycerine");
-		System.out.println("It should have exploded at this point");
-		e.add_incomp("Prod_Nitro","Prod_GAGA");
-		e.findBat("Prod_GAGA");
-		System.out.println("-------------------------");
-		System.out.println("Incompatibilities");
-		for(int i=0; i< e.nb_inc; i++){System.out.println(e.incomp[i][0] + "  " +e.incomp[i][1] );}
-		System.out.println("-------------------------");
-		System.out.println("Assignments");
-		for(int i=0; i< e.nb_assign; i++){System.out.println(e.assign[i][0] + "  " +e.assign[i][1] );}
-		System.out.println("-------------------------");
-    }
+	
 	
 }

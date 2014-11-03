@@ -116,6 +116,8 @@ public class Explosives{
 		nb_assign = nb_assign+1;
     }
 
+
+// 1ere moyenne 
 	//@requires prod != null;
 	//@requires prod.startsWith("Prod");
 	/*@requires //specifier en JML
@@ -124,7 +126,7 @@ public class Explosives{
 	  @			(assign[i][0].equals(assign[j][0]) ==> 
 	  @				(compatible(assign[j][1], prod)))));	
 	  @*/
-	public /*@ pure @*/ String findBat(String prod){
+	public /*@ pure @*/ String findBat1(String prod){
 		boolean trueFlag = false;
 		for(int i = 0; i < nb_assign; i++){
 			for(int k = 0; k < nb_assign; k++){
@@ -142,6 +144,103 @@ public class Explosives{
 		}
 		return null;
 	}	
+
+
+// 2eme moyenne
+	   public /*@ pure @*/ String findBat2(String prod) {
+         /* code -2 means not compatable.
+            -1 means compatible but product isnt already in the building.
+            >=0 is the index of the building where the product is already found.
+            */
+
+        //un map qui contient notre list de batiment availible.
+        HashMap batList = new HashMap();
+
+        for (int i = 0; i < nb_assign; i++) {
+            String bat = assign[i][0];
+            String product = assign[i][1];
+           // System.out.println("loop index : "+i+" batname: "+bat+" prod inside: "+product);
+
+            if (batList.containsKey(bat)) { //our map already contains the building  we only
+            // change the marker of a building if it becomes incompatible or to mark it as
+            // already containing the product.
+
+                if (!compatible(prod, product)) {
+                   //mark the building as incompatible
+                    batList.put(bat, Integer.valueOf(-2));
+                }
+                else if (((Integer)batList.get(bat)).intValue() ==-1 && prod.equals(product))
+                {
+                    //mark the building already containing the prod.
+                    batList.put(bat, Integer.valueOf(i));
+
+                }
+
+            }
+            else {  //building doesnt exist added and set intial building marker code.
+                System.out.println("bulding doesnt exsit adding it to the map");
+                if (compatible(prod, product)) {
+                    if (prod.equals(product)) {
+                        //add the batiment to the array with index of building containing
+                        // the prod already
+                        batList.put(bat, Integer.valueOf(i));
+                        System.out.println(" added at index " + i);
+                    } else {
+                        //add the name of the building with a marker that it is compatible for
+                        // the product.
+                        batList.put(bat, Integer.valueOf(-1));
+                        System.out.println("compatible but isnt the same");
+                    }
+                }
+                else {
+                    //add building with marker that the building is not compatable
+                    System.out.println("not comp new building gets a -2");
+                    batList.put(bat, Integer.valueOf(-2));
+                }
+            }
+        }
+
+
+        String bestBuildingMatch= null; //compatible and has the product
+        String secondBuildingMatch= null; //compatible but doesnt have the product
+
+        System.out.println("new map size "+batList.size());
+        //find the best matching building
+        for (Iterator it = batList.entrySet().iterator(); it.hasNext();) {
+            Map.Entry pairs = (Map.Entry) it.next();
+            System.out.println(pairs.getKey() + " = " + (Integer)pairs.getValue());
+            int comp = ((Integer) pairs.getValue()).intValue();
+            String name = pairs.getKey().toString();
+            if(comp >=0){
+                bestBuildingMatch = name;
+            }
+            else if(comp == -1){
+                secondBuildingMatch = name;
+            }
+        }
+        //return the best matching building
+        System.out.println("batlist? "+batList.values());
+        if(bestBuildingMatch !=null){
+            return bestBuildingMatch;
+        }
+        else if (secondBuildingMatch !=null){
+            return secondBuildingMatch;
+        }
+        else{   //no compatible building found so we create a new one
+            int count = 0;
+            while(true) { //loop until we find a name that doesnt exsist.
+                String name = "Bat_" + count;
+                if (! batList.containsKey(name)) {
+                    return name;
+                } else {
+                    count++;
+                }
+            }
+
+        }
+
+    }
+
 	
 	//@requires !prod1.equals(prod2);
 	//@requires prod1 != null;
