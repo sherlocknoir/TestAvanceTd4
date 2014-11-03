@@ -55,7 +55,7 @@ public class TestExplosivesFindBat {
 		e.add_assign("Bat_2","Prod_Mite");
 		e.add_assign("Bat_2","Prod_Glycerine");
 		e.add_incomp("Prod_Nitro","Prod_GAGA");
-		String bat = e.findBat("Prod_GAGA");
+		String bat = e.findBat1("Prod_GAGA");
 		System.out.println("-------------------------");
 		System.out.println("Incompatibilities");
 		for(int i=0; i< e.nb_inc; i++){System.out.println(e.incomp[i][0] + "  " +e.incomp[i][1] );}
@@ -77,7 +77,7 @@ public class TestExplosivesFindBat {
 		e.add_assign("Bat_2","Prod_Glycerine");
 		e.add_incomp("Prod_Mite","Prod_GAGA");
 		e.add_incomp("Prod_Nitro","Prod_GAGA");
-		String bat = e.findBat("Prod_GAGA");
+		String bat = e.findBat1("Prod_GAGA");
 		System.out.println("-------------------------");
 		System.out.println("Incompatibilities");
 		for(int i=0; i< e.nb_inc; i++){System.out.println(e.incomp[i][0] + "  " +e.incomp[i][1] );}

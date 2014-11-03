@@ -45,32 +45,33 @@ public class TestExplosivesJUnit4Public {
 				+ " -- failures : " + nb_fail);
 	}
 
-		@Test
-	public void invalidePreCond1(){
-		e = new Explosives();
-		String prod1 = null;
-		String prod2 = null;
-		e.add_incomp(prod1, prod2);
+	@Test
+	public void invalidePropiete_6(){
+		try{
+			e = new Explosives();
+			e.incomp[0][0] = "Prod_hd";
+			e.incomp[0][1] = "Prod_sos";
+			e.nb_inc++;
+			e.skip();
+			
+		} catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
 		
 	}
 
 	@Test
-	public void invalidePreCond2(){
-		e = new Explosives();
-		String prod1 = "Prodrrr";
-		String prod2 = null;
-		e.add_incomp(prod1, prod2);
-		
-	}
-	
-	@Test
-	public void invalidePreCond3(){
-		e = new Explosives();
-		e.nb_inc = 49;
-		String prod1 = "Prodrrr";
-		String prod2 = null;
-		e.add_incomp(prod1, prod2);
-		
+	public void  testSequence_Prop6_success() {
+		try{
+			Explosives e = new Explosives();
+			for (int i = 1; i < 25;) {
+				int j = i + 1;
+				e.add_incomp("Prod_ss" + i, "Prod_ss" + j);
+				i=i+2;
+			}
+		} catch(org.jmlspecs.jmlrac.runtime.JMLAssertionError e){
+				handleJMLAssertionError(e);		
+		}  
 	}
 
 

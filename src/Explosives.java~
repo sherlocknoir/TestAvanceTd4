@@ -1,5 +1,7 @@
 // Based on a B specification from Marie-Laure Potet.
-
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 //@ nullable_by_default
 public class Explosives{
     public int nb_inc = 0;
@@ -147,6 +149,13 @@ public class Explosives{
 
 
 // 2eme moyenne
+
+ /*@ requires prod != null && prod.startsWith("Prod");
+   @ ensures (\forall int i; 0<=i && i<nb_assign;
+   @	(assign[i][0].equals(\result) ==>
+   @	(compatible(assign[i][1], prod))));
+   @ ensures (\result.startsWith("Bat"));
+   @*/
 	   public /*@ pure @*/ String findBat2(String prod) {
          /* code -2 means not compatable.
             -1 means compatible but product isnt already in the building.
